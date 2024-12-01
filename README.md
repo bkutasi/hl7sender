@@ -1,6 +1,6 @@
 # HL7 PDF Sender
 
-A Rust-based utility for sending PDF documents as HL7 messages over TCP/IP. This tool encodes PDF files in Base64 format and transmits them using the HL7 MDM^T02 message type.
+A Rust-based utility for sending HL7 messages over TCP/IP with HL7 MDM^T02 message type.
 
 ## Features
 
@@ -18,8 +18,12 @@ A Rust-based utility for sending PDF documents as HL7 messages over TCP/IP. This
 git clone https://github.com/bkutasi/hl7sender
 cd hl7sender
 ```
+2. Run tests:
+```bash	
+cargo  test
+```
 
-2. Build the project:
+3. Build the project:
 
 ```bash
 cargo build --release
@@ -28,18 +32,19 @@ cargo build --release
 ## Usage
 
 ```bash
-./target/release/hl7sender <host> <port> <pdf_path>
+./target/release/hl7sender --host <host> --port <port> --message <message> --timeout <timeout>
 ```
 
 ### Arguments:
-- `host`: The target HL7 server hostname or IP address
-- `port`: The port number of the HL7 server
-- `pdf_path`: Path to the PDF file to be sent
+- `--host`: The target HL7 server hostname or IP address
+- `--port`: The port number of the HL7 server
+- `--message`: Path to the PDF file to be sent
+- `--timeout`: The maximum number of seconds to wait for a response
 
 ### Example:
 
 ```bash
-./target/release/hl7sender localhost 2575 message.hl7
+./target/release/hl7sender --host localhost --port 2525 --message message.hl7 --timeout 60
 ```
 
 
@@ -71,11 +76,11 @@ For detailed implementation, see the source code:
 Testing coverage:
 
 ```
-2024-11-30T16:32:13.805516Z  INFO cargo_tarpaulin::report: Coverage Results:
+2024-12-01T11:58:09.827358Z  INFO cargo_tarpaulin::report: Coverage Results:
 || Uncovered Lines:
-|| src/main.rs: 56-57, 83-89, 91, 98-102
+|| src/main.rs: 65, 97, 106, 110-114
 || Tested/Total Lines:
-|| src/main.rs: 38/53 +16.80%
+|| src/main.rs: 35/43 +0.00%
 || 
-71.70% coverage, 38/53 lines covered, +16.80% change in coverage
+81.40% coverage, 35/43 lines covered, +0.00% change in coverage
 ```
